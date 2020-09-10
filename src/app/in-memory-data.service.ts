@@ -26,8 +26,6 @@ export class InMemoryDataService implements InMemoryDbService {
   // Overrides the genId method to ensure that a hero always has an id.
   // It returns an initial number, if the heroes array is empty
   genId(heroes: Hero[]): number {
-    return heroes.length > 0
-      ? Math.max(...heroes.map(hero => hero.id)) + 1
-      : 11;
+    return heroes.length > 0 ? Math.max(...heroes.map(hero => hero.id)) + 1 : 11;
   }
 }
