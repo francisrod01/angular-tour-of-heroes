@@ -42,10 +42,10 @@ export class HeroService {
   }
 
   getHeroes(): Observable<Hero[]> {
-    // TODO: send the message _after_ fetching the heroes
-    this.log('HeroService: fetched heroes');
     return this.http.get<Hero[]>(this.heroesUrl)
       .pipe(
+        // Tap a message into the flow of observable values
+        tap(_ => this.log('fetched heroes')),
         // It intercepts an Observable that failed.
         catchError(this.handleError<Hero[]>('getHeroes', []))
       );
