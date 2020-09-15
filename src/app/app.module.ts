@@ -6,12 +6,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 
-import { AppRoutingModule } from './app-routing.module';
-
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HeroesModule } from './heroes/heroes.module';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HeroDetailComponent } from './hero-detail/hero-detail.component';
-import { HeroesComponent } from './heroes/heroes.component';
 import { CrisisListComponent } from './crisis-list/crisis-list.component';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -21,9 +20,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   declarations: [
     AppComponent,
     DashboardComponent,
-    HeroesComponent,
     CrisisListComponent,
-    HeroDetailComponent,
     HeroSearchComponent,
     MessagesComponent,
     PageNotFoundComponent
@@ -31,6 +28,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   imports: [
     BrowserModule,
     FormsModule,
+    HeroesModule,
     AppRoutingModule,
     HttpClientModule,
     // It intercepts HTTP requests and returns simulated server responses
