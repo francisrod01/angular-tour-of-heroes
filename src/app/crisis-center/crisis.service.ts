@@ -72,7 +72,7 @@ export class CrisisService {
 
   //////// Save methods /////////
 
-  // POST: add a new Ccrisis to the server
+  // POST: add a new Crisis to the server
   addCrisis(crisis: Crisis): Observable<Crisis> {
     return this.http.post<Crisis>(this.crisesUrl, crisis, this.httpOptions).pipe(
       tap((newCrisis: Crisis) => this.log(`added crisis w/ id=${newCrisis.id}`)),
