@@ -10,9 +10,9 @@ import { InMemoryDataService } from './in-memory-data.service';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeroesModule } from './heroes/heroes.module';
+import { CrisisCenterModule } from './crisis-center/crisis-center.module';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { CrisisListComponent } from './crisis-list/crisis-list.component';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { MessagesComponent } from './messages/messages.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -21,7 +21,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   declarations: [
     AppComponent,
     DashboardComponent,
-    CrisisListComponent,
     HeroSearchComponent,
     MessagesComponent,
     PageNotFoundComponent
@@ -31,6 +30,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     BrowserAnimationsModule,
     FormsModule,
     HeroesModule,
+    CrisisCenterModule,
     AppRoutingModule,
     HttpClientModule,
     // It intercepts HTTP requests and returns simulated server responses
