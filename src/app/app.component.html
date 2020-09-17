@@ -3,10 +3,12 @@
   <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
   <a routerLink="/crisis-center" routerLinkActive="active">Crisis Center</a>
   <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
+  <a [routerLink]="[{ outlets: { popup: ['compose'] } }]">Contact</a>
 </nav>
 
 <div [@routeAnimation]="getAnimationData(routerOutlet)">
   <router-outlet #routerOutlet="outlet"></router-outlet>
 </div>
 
+<router-outlet name="popup"></router-outlet>
 <app-messages></app-messages>
