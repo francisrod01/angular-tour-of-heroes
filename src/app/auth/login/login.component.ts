@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 
@@ -29,8 +29,15 @@ export class LoginComponent {
         // However, to keep the example simple, we will always redirect to `/admin`.
         const redirectUrl = '/admin';
 
-        // Redirect the user
-        this.router.navigate([redirectUrl]);
+        // Set our navigation extras object that passes on our global query params
+        // and fragment.
+        const navigationExtras: NavigationExtras = {
+          queryParamsHandling: 'preserve',
+          preserveFragment: true
+        };
+
+        // Redirect the user with extras
+        this.router.navigate([redirectUrl], navigationExtras);
       }
     });
   }

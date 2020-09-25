@@ -4,6 +4,7 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   CanActivateChild,
+  NavigationExtras,
   UrlTree
 } from '@angular/router';
 
@@ -21,7 +22,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): boolean | UrlTree {
+  ): true | UrlTree {
     console.log('AuthGuard#canActivate called');
 
     const url: string = state.url;
@@ -32,20 +33,30 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): boolean | UrlTree {
+  ): true | UrlTree {
     return this.canActivate(next, state);
   }
 
-  checkLogin(url: string): true|UrlTree {
+  checkLogin(url: string): true | UrlTree {
     if (this.authService.isLoggedIn) {
       return true;
     }
 
+    // Create a dummy session id.
+    const sessionId = 123456789;
+
+    // Set out navigation extras object that contains our
+    // global query params and fragment
+    const navigationExtras: NavigationExtras = {
+      queryParams: { session_id: sessionId },
+      fragment: 'anchor'
+    };
+
     // Store the attempted URL for redirecting
     this.authService.redirectUrl = url;
 
-    // Redirect to the login page
-    return this.router.parseUrl('/login');
+    // Redirect to the login page with extras
+    return this.router.createUrlTree(['/login'], navigationExtras);
   }
 
 }
