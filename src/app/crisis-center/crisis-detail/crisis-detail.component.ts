@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { Component, OnInit, HostBinding } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
 import { Crisis } from '../crisis';
-import { CrisisService } from '../crisis.service';
+import { DialogService } from 'src/app/dialog.service';
 
 @Component({
   selector: 'app-crisis-detail',
@@ -13,16 +12,26 @@ import { CrisisService } from '../crisis.service';
   styleUrls: ['./crisis-detail.component.css']
 })
 export class CrisisDetailComponent implements OnInit {
-  crisis$: Observable<Crisis>;
+  crisis: Crisis;
+  editName: string;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private crisisService: CrisisService,
+    private dialogService: DialogService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getCrisis();
+  }
+
+  cancel() {
+    this.goToCrises();
+  }
+
+  save() {
+    this.crisis.name = this.editName;
+    this.goToCrises();
   }
 
   canDeactivate(): Observable<boolean> | boolean {
@@ -35,24 +44,20 @@ export class CrisisDetailComponent implements OnInit {
     return this.dialogService.confirm('Discard changes?');
   }
 
-  getCrisis(): void {
-    this.crisis$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.crisisService.getCrisis(+params.get('id')))
-    );
+  getCrisis() {
+    this.route.data
+      .subscribe((data: { crisis: Crisis }) => {
+        this.editName = data.crisis.name;
+        this.crisis = data.crisis;
+      });
   }
 
-  goToCrises(crisis: Crisis) {
-    const crisisId = crisis ? crisis.id : null;
+  goToCrises() {
+    const crisisId = this.crisis ? this.crisis.id : null;
     // Pass along the crisis id if available, so that the CrisisList
     // component can select that crisis.
     // Relative navigation back to crises.
     this.router.navigate(['../', { id: crisisId }], { relativeTo: this.route });
-  }
-
-  save(crisis: Crisis): void {
-    this.crisisService.updateCrisis(crisis)
-      .subscribe(() => this.goToCrises(crisis));
   }
 
 }
