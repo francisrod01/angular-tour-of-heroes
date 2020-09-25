@@ -25,6 +25,16 @@ export class CrisisDetailComponent implements OnInit {
     this.getCrisis();
   }
 
+  canDeactivate(): Observable<boolean> | boolean {
+    // Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
+    if (!this.crisis || this.crisis.name === this.editName) {
+      return true;
+    }
+    // Otherwise ask the user with the dialog service and return its
+    // observable which resolves to true or false when the user decides
+    return this.dialogService.confirm('Discard changes?');
+  }
+
   getCrisis(): void {
     this.crisis$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
