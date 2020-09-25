@@ -3,6 +3,7 @@ import {
   CanActivate, Router,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
+  CanActivateChild,
   UrlTree
 } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -12,7 +13,7 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanActivateChild {
   constructor(
     private authService: AuthService,
     private router: Router
@@ -27,6 +28,13 @@ export class AuthGuard implements CanActivate {
     const url: string = state.url;
 
     return this.checkLogin(url);
+  }
+
+  canActivateChild(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    return this.canActivate(next, state);
   }
 
   checkLogin(url: string): true|UrlTree {
