@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ComposeMessageComponent } from './compose-message/compose-message.component';
@@ -28,7 +28,16 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [
+    RouterModule.forRoot(
+      appRoutes,
+      {
+        // Immediately load all lazy loaded routes
+        // (routes with a `loadChildren` property)
+        preloadingStrategy: PreloadAllModules
+      }
+    )
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
