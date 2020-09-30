@@ -18,8 +18,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeroesModule } from './heroes/heroes.module';
 import { CrisisCenterModule } from './crisis-center/crisis-center.module';
 
-import { AdminModule } from './admin/admin.module';
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -27,7 +25,6 @@ import { AdminModule } from './admin/admin.module';
     FormsModule,
     HeroesModule,
     CrisisCenterModule,
-    AdminModule,
     AppRoutingModule,
     HttpClientModule,
     // It intercepts HTTP requests and returns simulated server responses
