@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  CanActivate, Router,
+  CanActivate, CanLoad, Router, Route,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   CanActivateChild,
@@ -13,11 +13,17 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, CanActivateChild {
+export class AuthGuard implements CanLoad, CanActivate, CanActivateChild {
   constructor(
     private authService: AuthService,
     private router: Router
   ) {}
+
+  canLoad(route: Route): true | UrlTree {
+    const url = `/${route.path}`;
+
+    return this.checkLogin(url);
+  }
 
   canActivate(
     next: ActivatedRouteSnapshot,

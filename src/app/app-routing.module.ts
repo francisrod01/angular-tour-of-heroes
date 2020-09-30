@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from './auth/auth.guard';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ComposeMessageComponent } from './compose-message/compose-message.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -9,7 +11,8 @@ const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   {
     path: 'admin',
-    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    canLoad: [AuthGuard]
   },
   { path: 'compose', component: ComposeMessageComponent, outlet: 'popup' },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
