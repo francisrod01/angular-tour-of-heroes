@@ -16,7 +16,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 import { AppRoutingModule } from './app-routing.module';
 import { HeroesModule } from './heroes/heroes.module';
-import { CrisisCenterModule } from './crisis-center/crisis-center.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   imports: [
@@ -24,7 +24,7 @@ import { CrisisCenterModule } from './crisis-center/crisis-center.module';
     BrowserAnimationsModule,
     FormsModule,
     HeroesModule,
-    CrisisCenterModule,
+    AuthModule,
     AppRoutingModule,
     HttpClientModule,
     // It intercepts HTTP requests and returns simulated server responses
