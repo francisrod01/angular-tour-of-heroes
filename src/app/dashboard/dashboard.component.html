@@ -3,7 +3,7 @@
 <div class="grid grid-pad">
   <a
     *ngFor="let hero of heroes"
-    routerLink="/detail/{{hero.id}}"
+    routerLink="/hero/{{hero.id}}"
     class="col-1-4"
   >
     <div class="module hero">
@@ -13,3 +13,5 @@
 </div>
 
 <app-hero-search></app-hero-search>
+
+<button routerLink="/sidekicks">Go to sidekicks</button>
