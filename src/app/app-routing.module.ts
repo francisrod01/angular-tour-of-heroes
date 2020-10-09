@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ComposeMessageComponent } from './compose-message/compose-message.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { AuthGuard } from './auth/auth.guard';
+import { SelectivePreloadingStrategyService } from './selective-preloading-strategy.service';
 
 const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
   {
     path: 'crisis-center',
     loadChildren: () => import('./crisis-center/crisis-center.module').then(m => m.CrisisCenterModule),
+    data: { preload: true }
   },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
@@ -34,7 +36,7 @@ const appRoutes: Routes = [
       {
         // Immediately load all lazy loaded routes
         // (routes with a `loadChildren` property)
-        preloadingStrategy: PreloadAllModules
+        preloadingStrategy: SelectivePreloadingStrategyService
       }
     )
   ],
