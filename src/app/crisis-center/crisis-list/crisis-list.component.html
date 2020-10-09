@@ -1,14 +1,12 @@
-<h2>Crises</h2>
-
-<div>
+<!-- <div>
   <label>Crisis name:
     <input #crisisName />
   </label>
-  <!-- (click) passes input value to add() and then clears the input -->
-  <!-- <button (click)="add(crisisName.value); crisisName.value=''">
+  < !-- (click) passes input value to add() and then clears the input -- >
+  <button (click)="add(crisisName.value); crisisName.value=''">
     add
-  </button> -->
-</div>
+  </button>
+</div> -->
 
 <ul class="crises">
   <li
@@ -23,5 +21,9 @@
   </li>
 </ul>
 
+<router-outlet></router-outlet>
+
 <!-- This is an example of a not-found route -->
-<button routerLink="/sidekicks">Go to sidekicks</button>
+<p>
+  <button routerLink="/sidekicks">Go to sidekicks</button>
+</p>

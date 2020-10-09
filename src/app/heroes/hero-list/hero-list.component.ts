@@ -32,7 +32,7 @@ export class HeroListComponent implements OnInit {
         this.selectedId = +params.get('id');
         return this.heroService.getHeroes();
       })
-    )
+    );
   }
 
   // add(name: string): void {
