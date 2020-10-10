@@ -22,7 +22,7 @@ import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     FormsModule,
     HeroesModule,

@@ -31,14 +31,12 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(
-      appRoutes,
-      {
-        // Immediately load all lazy loaded routes
-        // (routes with a `loadChildren` property)
-        preloadingStrategy: SelectivePreloadingStrategyService
-      }
-    )
+    RouterModule.forRoot(appRoutes, {
+    // Immediately load all lazy loaded routes
+    // (routes with a `loadChildren` property)
+    preloadingStrategy: SelectivePreloadingStrategyService,
+    initialNavigation: 'enabled'
+})
   ],
   exports: [RouterModule]
 })
