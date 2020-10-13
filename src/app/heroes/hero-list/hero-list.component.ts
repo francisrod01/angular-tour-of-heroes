@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs';
@@ -15,14 +16,22 @@ import { HeroService } from '../hero.service';
 export class HeroListComponent implements OnInit {
   heroes$: Observable<Hero[]>;
   selectedId: number;
+  data = {
+    name: 'Hero List',
+    description: 'This is the hero list description',
+    image: 'https://i.imgur.com/eTvlyy3.jpeg'
+  };
 
   constructor(
     private heroService: HeroService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private title: Title,
+    private meta: Meta
   ) { }
 
   ngOnInit(): void {
     this.getHeroes();
+    this.getMetaTags();
   }
 
   getHeroes(): void {
@@ -33,6 +42,18 @@ export class HeroListComponent implements OnInit {
         return this.heroService.getHeroes();
       })
     );
+  }
+
+  getMetaTags() {
+    this.title.setTitle(this.data.name);
+    this.meta.addTags([
+      { name: 'description', content: this.data.description },
+      { name: 'twitter:card', content: 'summary' },
+      { name: 'og:url', content: '/superheroes' },
+      { name: 'og:title', content: this.data.name },
+      { name: 'og:description', content: this.data.description },
+      { name: 'og:image', content: this.data.image },
+    ]);
   }
 
   // add(name: string): void {
